@@ -1,55 +1,61 @@
-#
-# Copyright (C) 2017-2018 Pico Technology Ltd.
-#
-from __future__ import print_function
-from setuptools import setup
+#make sure you make any necassary changes before running this
+from setuptools import setup, find_packages
 
-import ctypes
-from ctypes import *
-from ctypes.util import find_library
-import sys
-import os.path
+"""
+_______________________________________________________
+
+All Changes are the strings below
+_______________________________________________________
+"""
+#Must change
+DriverName="qil_Pico"
+version ='1.0.0'
+author ='Your name'
+email ='bfie3543@.sydney.edu.au'
+repository_url ='https://github.com/Quantum-Integration-Laboratory/',
+description ='A shorter description, possibly just copy github about section'
+
+#Less important
+license ='A license type'
+classifiers =["Programming Language :: Python :: 3",
+            "License :: OSI Approved :: BSD-2 License",
+            "Operating System :: OS Independent",]
+keywords ='anything that maybe useful'
 
 
-signalfile = ".sdkwarning"
-if not os.path.exists(signalfile):
-    name = 'ps2000'
-    try:
-        if sys.platform == 'win32':
-            result = ctypes.WinDLL(find_library(name))
-        else:
-            result = cdll.LoadLibrary(find_library(name))
-    except OSError:
-        print("Please install the PicoSDK in order to use this wrapper."
-              "Visit https://www.picotech.com/downloads")
-        exit(1)
-    open(signalfile, 'a').close()
 
-with open("README.md") as f:
-    readme = f.read()
+"""
+_______________________________________________________
+
+For standard use these lines should not need to be changed
+_______________________________________________________
+"""
+  
+#gets all the requirements
+with open('requirements.txt') as f:
+    requirements = f.readlines()
+
+#Copys the github read me as the long description
+with open ('readme.md') as f:
+    long_description = f.read()
     
+#automatically gets all packages in the passed folder
+package_list = find_packages(where=DriverName)
+
+
 setup(
-    name='picosdk',
-    packages=['picosdk'],
-    install_requires=["numpy>=1.12.1"],
-    version='1.0',
-    description='PicoSDK Python wrapper',
-    long_description=readme,
-    author='Pico Technology Ltd',
-    author_email='support@picotech.com',
-    license="ISC",
-    url='https://www.picotech.com',
-    classifiers=[
-        "Development Status :: 5 - Production/Stable",
-        "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: ISC License (ISCL)",
-        "Natural Language :: English",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Topic :: Scientific/Engineering",
-    ],
+        name =DriverName,
+        version =version,
+        author =author,
+        author_email =email,
+        url =repository_url,
+        description =description,
+        long_description = long_description,
+        long_description_content_type ="text/markdown",
+        license =license,
+        packages = package_list,
+        classifiers =classifiers,
+        keywords =keywords,
+        install_requires = requirements,
+        zip_safe = False
 )

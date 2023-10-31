@@ -1,3 +1,29 @@
+# qil_Pico
+Ben's functions to clean things up a little bit. Currently just implements the `ps5000aBlockExample` into a class that should better handle connection and disconnection, multiple channels and multiple calls
+
+## Installation
+In order to make files easier to access they can be installed as a package via pip and such.
+
+Our naming convention for a driver is `qil_<DriverName>` matching cases, where `<>` indicates the parts you can change. 
+ 
+With the driver repo written it should be cloned onto a lab pc using github desktop, into the directory `./Docs/GITHUB/Drivers/`, such that there will now be a folder named `./Docs/GITHUB/Drivers/<repo name>`. with structure
+```
+<repo name>
+  |->qil_<DriverName>
+  ...
+  |->requirements.txt
+  \->setup.py
+```
+
+With everything cloned correctly, open a terminal or anaconda prompt depending on what is used `cd ./<path>/<repo name>` and then run 
+```
+pip install --editable .
+```
+The `--editable` flag means the installed script just points back to the folder so updates will be recognised when we pull any updates into this folder
+
+## Pico SDK
+The Pico SDK is a requirement all the setup stuff is included see below for details.
+
 # picosdk-python-wrappers
 
 Welcome to the PicoSDK for Python. It allows you to control PicoScope devices in your own Python programs.
